@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Form | Upendo Animal Shelter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+</head>
+<body class="inner-page application-page">
+    <header class="inner-header">
+        <a class="inner-brand" href="index.html">
+            <img src="logo.jpg" alt="" class="inner-logo">
+            <span>Upendo <strong>Shelter</strong></span>
+        </a>
+        <nav class="inner-nav" aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="animal.html">Our animals</a>
+            <a href="about.html">About &amp; Donations</a>
+            <a href="contact.html">Contact</a>
+            <a class="inner-nav-cta active" href="form.html" aria-current="page">Adoption Form</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="application-heading">
+            <span class="inner-eyebrow">A new chapter starts here</span>
+            <h1>Upendo Animal Shelter</h1>
+            <div id="live-datetime" class="datetime-display">loading current date and time...</div>
+        </section>
+
+        <section class="forms-container">
+            <div class="form-intro">
+                <span class="form-paw" aria-hidden="true">♡</span>
+                <h2>🏡 Pet adoption Application</h2>
+                <p>ready to give a lonely pet a home??? Fil out your details below.</p>
+            </div>
+            <form id="adoption-form">
+                <div class="form-group">
+                    <label for="adopt-email">Email address</label>
+                    <input type="email" id="adopt-email" name="adopt-email" placeholder="anderson@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adopt-phone">phone number</label>
+                    <input type="tel" id="adopt-phone" name="adopt-phone" placeholder="0723448754">
+                </div>
+
+                <div class="form-group">
+                    <label for="pet-type">which animal are you interested in?</label>
+                    <select id="pet-type" name="pet-type" required>
+                        <option value="" disabled selected>select pet type</option>
+                        <option value="dog">Dog /puppy</option>
+                        <option value="cat">cat /kitten</option>
+                        <option value="other">other small animal</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="home-type"> your living situation</label>
+                    <select id="home-type" name="home-type" required>
+                        <option value="" disabled selected>selct home type</option>
+                        <option value="own">own house (Fenced yard)</option>
+                        <option value="rent">rented apartment/ flat (with permission to have pets)</option>
+                        <option value="farm">farm / Rural Property</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-adopt">Submit Adoption Request</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="inner-footer">
+        <span>Upendo Animal Shelter</span>
+        <span>&copy;2026 Upendo Animal Shelter</span>
+    </footer>
+
+    <script>
+        document.getElementById('adoption-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.currentTarget);
+            const subject = 'Adoption Request';
+            const body = [
+                'Adoption request details:',
+                `Email address: ${formData.get('adopt-email')}`,
+                `Phone number: ${formData.get('adopt-phone') || 'Not provided'}`,
+                `Animal interested in: ${formData.get('pet-type')}`,
+                `Living situation: ${formData.get('home-type')}`
+            ].join('\n');
+
+            window.location.href = `mailto:37965kaleb@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const formattedDateTime = now.toLocaleDateString('en-US', options);
+            document.getElementById('live-datetime').textContent = formattedDateTime;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
